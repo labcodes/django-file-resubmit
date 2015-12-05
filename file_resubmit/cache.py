@@ -4,7 +4,7 @@ try:
 except ImportError:
     from io import BytesIO
 
-from django.core.cache import get_cache
+from django.core.cache import caches
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
@@ -13,7 +13,7 @@ class FileCache(object):
         self.backend = self.get_backend()
 
     def get_backend(self):
-        return get_cache('file_resubmit')
+        return caches['file_resubmit']
 
     def set(self, key, upload):
         state = {
